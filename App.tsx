@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Quiz from "./screens/Quiz";
+import LeaderBoard from "./screens/LeaderBoard";
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Quiz"
+          component={Quiz}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="home" size={size} color={color} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Leaderboard"
+          component={LeaderBoard}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="leaderboard" size={size} color={color} />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
